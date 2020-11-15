@@ -63,14 +63,26 @@
                      <div class="menu-area">
                         <div class="limit-box">
                            <nav class="main-menu">
-                              <ul class="menu-area-main">
+						    <?php wp_nav_menu( array(
+                    'theme_location' => 'primary',
+                    'depth' => 2,
+                    'container' => false,
+                    'menu_class' => 'menu-area-main',
+                    'direct_parent' => true,
+                    'sub_menu' => true,
+                    'show_parent' => true,
+                    'walker'          => '',
+                    'items_wrap' => '<ul id="%1$s" class="%2$s" role="menu" >%3$s</ul>',
+                   // 'walker'         => new my_walker_nav_menu_start_el,
+                )); ?>
+                              <!--<ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
                                  <li> <a href="#about">About</a> </li>
                                  <li><a href="#plant">Plant</a></li>
                                  <li><a href="#gallery">Gallery</a></li>
                                  <li><a href="#contact">Contact Us</a></li>
                                   <li class="last"><a href="#"><i class="fa fa-search"></i></a></li>
-                              </ul>
+                              </ul>-->
                            </nav>
                         </div>
                      </div>
