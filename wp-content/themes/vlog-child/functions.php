@@ -12,7 +12,7 @@ add_theme_support('post-thumbnails');
 // Set post thumbnail size.
 set_post_thumbnail_size(1200, 9999);
 
-function vlog_menus()
+function vlog_child_menus()
 {
     $locations = [
         'primary' => __('Header Menu'),
@@ -23,11 +23,11 @@ function vlog_menus()
     register_nav_menus($locations);
 }
 
-add_action('init', 'vlog_menus');
+add_action('init', 'vlog_child_menus');
 
 /* Theme Customizer Panel */
 
-function vlog_customize_register($wp_customize)
+function vlog_child_customize_register($wp_customize)
 {
     $wp_customize->add_section('vlog_header_section', [
         'title' => "Vlog Header Section",
@@ -50,18 +50,18 @@ function vlog_customize_register($wp_customize)
         ])
     );
 }
-add_action('customize_register', 'vlog_customize_register');
+add_action('customize_register', 'vlog_child_customize_register');
 
 
-add_action('add_meta_boxes', 'custom_meta_box');
-function custom_meta_box() {
+add_action('add_meta_boxes', 'custom_meta_boxes');
+function custom_meta_boxes() {
     global $post;
    
 		
-		add_meta_box('post-banner', 'Banner Slide', 'post_banner_cb', 'post');
+		add_meta_box('post-banner', 'Banner Slide', 'post_banner_cbs', 'post');
     }
 	
-function post_banner_cb()
+function post_banner_cbs()
 {
     global $post;
     $featured_item = get_post_meta($post->ID, 'featured_item', true);
@@ -106,8 +106,8 @@ function post_banner_cb()
   
 <?php
 }
-add_action('save_post', 'custommeta_save');
-function custommeta_save()
+add_action('save_post', 'custommeta_saves');
+function custommeta_saves()
 {
     global $post;
 
@@ -121,9 +121,9 @@ function custommeta_save()
     );
 }
 
-add_filter('nav_menu_css_class', 'special_nav_class', 10, 2);
+add_filter('nav_menu_css_class', 'special_nav_class_child', 10, 2);
 
-function special_nav_class($classes, $item)
+function special_nav_class_child($classes, $item)
 {
     if (in_array('current-menu-item', $classes)) {
         $classes[] = 'active ';
